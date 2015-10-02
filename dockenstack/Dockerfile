@@ -48,6 +48,7 @@ RUN chmod 755 /opt/dockenstack/bin/*
 
 # Install devstack scripts
 RUN git clone https://github.com/openstack-dev/devstack /devstack
+RUN cd /devstack; git checkout stable/kilo
 
 # Install prereq packages.
 RUN /devstack/tools/install_prereqs.sh
@@ -70,8 +71,8 @@ RUN apt-get install -q -y python-pip
 RUN pip install six
 
 # Install all pip requirements
-RUN pip install -r https://raw.github.com/openstack/requirements/master/global-requirements.txt
-RUN pip install -r https://raw.github.com/openstack/tempest/master/requirements.txt
+RUN pip install -r https://raw.github.com/openstack/requirements/stable/kilo//global-requirements.txt
+RUN pip install -r https://raw.github.com/openstack/tempest/stable/kilo/requirements.txt
 
 # Pre-checkout git repos
 RUN su devstack -c '/bin/bash /opt/dockenstack/bin/openstack-git-checkout'
